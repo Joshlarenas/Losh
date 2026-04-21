@@ -81,7 +81,7 @@ Graphics_Context g_sContext;        // Declare a graphic library context
 #define CONFIG_REG      0x01    // Configuration register
 #define RESULT_REG      0x00    // Result register
 
-// RN=7, CT=0, M=3, ME=1 → 0x7604
+// RN=7, CT=0, M=3, ME=1 â†’ 0x7604
 #define CONFIG_VALUE    0x7604
 
 
@@ -114,6 +114,8 @@ void main(void) {
        P1REN |= (BUT1); // Enable built-in resistor
        P1OUT |= (BUT1); // Set resistor as pull-up
 
+       P2DIR |= BIT7;   // Set P2.7 as output for buzzer
+       P2OUT &= ~BIT7;  // Start low
        //Initialize_UART();
        Initialize_ADC_Accel();
 
@@ -326,11 +328,3 @@ void buzz(unsigned int duration_ms) {
     }
     Graphics_drawImage(&g_sContext, &Warning_clean4BPP_UNCOMP, 0, 0);
 }
-
-
-
-
-
-
-
-
